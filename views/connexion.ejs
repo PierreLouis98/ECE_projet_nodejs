@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Login and Registration Form with HTML5 and CSS3</title>
+        <link rel="stylesheet" type="text/css" href="/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="codrops-top">
+                <span class="right"></span>
+            </div>
+            <header>
+                <h1>Page d'inscription et de connexion<span> Projet NODE JS</span></h1>
+				
+            </header>
+            <section>				
+                <div id="container_demo" >
+                   
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="Conteneur">
+                        <div id="login" class="animate form">
+                            <form  action="mysuperscript.php" autocomplete="on"> 
+                                <h1>Page De Connexion   </h1> 
+                                <p> 
+                                    <label for="username" class="uname" data-icon="u" > Veuillez renseigner votre e-mail  </label>
+                                    <input id="username" name="username" required="required" type="text" placeholder="monmail@mail.com"/>
+                                </p>
+                                <p> 
+                                    <label for="password" class="youpasswd" data-icon="p"> Votre mot de passe  </label>
+                                    <input id="password" name="password" required="required" type="password" placeholder="ex: MonMotDePasse" /> 
+                                </p>
+                
+                                <p class="login button"> 
+                                    <input type="submit" value="Se Connecter "> 
+								</p>
+                                <p class="change_link">
+									Vous n'avez pas de compte ? 
+									<a href= "/inscription" class="to_register">Créer Un Compte </a>
+								</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
