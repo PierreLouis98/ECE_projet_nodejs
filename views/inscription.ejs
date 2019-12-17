@@ -1,56 +1,47 @@
 <!DOCTYPE html>
-
     <head>
         <meta charset="UTF-8" />
         <title>Projet node JS </title>
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-
     </head>
     <body>
         <div class="container">
-            <div class="codrops-top">
-                <span class="right"></span>
-            </div>
             <header>
                 <h1>Page d'inscription et de connexion<span> Projet NODE JS</span></h1>
+				
             </header>
-            <div>				
-                <div id="container_demo" >
-                    
-                    <a class="hiddenanchor" id="toregister"></a>
-                    <a class="hiddenanchor" id="tologin"></a>
+                <section>
                     <div id="Conteneur">
-                        <div id="register" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                        <div id="inscription" >
+                            <form > 
                                 <h1> Créer un compte </h1> 
                                 <p> 
-                                    <label for="usernamesignup" class="uname" data-icon="u">Nom d'utilisateur </label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="Votre nom d'utilisateur" />
+                                    <label >Nom d'utilisateur </label>
+                                    <input required="required" type="text" placeholder="Votre nom d'utilisateur" />
                                 </p>
                                 <p> 
-                                    <label for="emailsignup" class="youmail" data-icon="e" > Votre email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="monmail@mail.com"/> 
+                                    <label  > Votre email</label>
+                                    <input type="email" placeholder="monmail@mail.com"/> 
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Mot de passe   </label>
-                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="MonMotDePasse"/>
+                                    <label>Mot de passe   </label>
+                                    <input type="password" placeholder="MonMotDePasse"/>
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Veuillez confirmer votre mot de passe  </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="MonMotDePasse"/>
+                                    <label >Veuillez confirmer votre mot de passe  </label>
+                                    <input required="required" type="password" placeholder="MonMotDePasse"/>
                                 </p>
                                 <p class="signin button"> 
 									<input type="submit" value="Confirmer"/> 
 								</p>
-                                <p class="change_link">  
+                                <p class="link">  
 									Vous avez déjà un compte ? 
-									<a href="connexion" class="to_register"> Connectez vous  </a>
+									<a href="connexion.html" > Connectez vous  </a>
 								</p>
                             </form>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        </div>
+                
+            </section>
         </div>
-    </body>
+    </body> 
