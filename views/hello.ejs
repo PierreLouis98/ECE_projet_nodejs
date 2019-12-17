@@ -28,14 +28,12 @@
         });
       })
 
-      $('#show-users').click((e) => {
-        e.preventDefault();
-        $.getJSON("/users/<%= name %>", {}, (data) => {
-          const content = data.map(d => {
-            return 'name: '+d.name+', mail: '+d.mail+', password: '+d.password+'';
-          })
-        })
-          $('#users').append(content.join("\n"));
+      $('#show-users').click((f) => {
+        f.preventDefault();
+        $.getJSON("/users/<%= name %>", {}, (data) => { 
+          const content =  "name: "+data.name+", mail: "+data.mail+", password: "+data.password+" ";
+          $('#users').append(content);
+        }); // Load JSON-encoded data from the server using a GET HTTP request.
       })
     </script>
   </body>
