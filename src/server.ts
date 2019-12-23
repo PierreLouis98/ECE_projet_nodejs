@@ -51,6 +51,13 @@ app.post('/metrics/:id', (req: any, res: any) => {
   })
 })
 
+app.post('/users/:id', (req: any, res: any) => {
+  dbUs.save(req.params.id, (err: Error | null) => {
+    if (err) throw err
+    res.status(200).send()
+  })
+})
+
 app.listen(port, (err: Error) => {
   if (err) throw err
   console.log(`Server is running on http://localhost:${port}`)

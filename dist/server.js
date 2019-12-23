@@ -46,6 +46,7 @@ app.post('/metrics/:id', function (req, res) {
         res.status(200).send();
     });
 });
+
 app.listen(port, function (err) {
     if (err)
         throw err;
