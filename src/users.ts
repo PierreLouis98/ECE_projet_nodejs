@@ -45,7 +45,7 @@ export class UsersHandler {
         .on('end', (err: Error) => {
           callback(null, user)
         })
-    }
+    }    
     
 }
   
