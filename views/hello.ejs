@@ -19,9 +19,7 @@
       </button>
       <div id="deleted"></div>
       <h5>c) Graph:</h5>
-      <button class="btn btn-success" id="show-graph">
-        Bring the graph
-      </button>
+      <a href= "../graph" class="to_register">Bring the graph</a>
       <h3>Infos:</h3>
       <button class="btn btn-success" id="show-users">
         Bring the user infos
@@ -48,17 +46,6 @@
           var path = '/delete-metric/metric:<%= name %>:'+ data[0].timestamp;
           $.getJSON(path, {});
           $('#deleted').append(result); // append: Insert content, specified by the parameter, to the end of each element in the set of matched elements.
-        });
-      })
-
-      $('#show-graph').click((e) => {
-        e.preventDefault();
-        $.getJSON("/graph/<%= name %>", {}, (data) => {
-          const content = data.map(d => { // on récupère un tableau de metrics
-            return '<div>timestamp: '+d.timestamp+', value: '+d.value+'</div>'; // facon dont on veut l'afficher (une string)
-          })
-          const result = content.join(""); // join: returns the array as a string, the elements will be separated by a specified separator
-          $('#metrics').append(result); // append: Insert content, specified by the parameter, to the end of each element in the set of matched elements.
         });
       })
 

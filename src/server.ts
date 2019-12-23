@@ -31,6 +31,11 @@ app.get('/inscription', (req: any, res: any) => {
   res.end()
 })
 
+app.get('/graph', (req: any, res: any) => {
+  res.render('graph.ejs')
+  res.end()
+})
+
 app.get('/hello/:name', (req: any, res: any) => {
   res.render('hello.ejs', {name: req.params.name})
 })
