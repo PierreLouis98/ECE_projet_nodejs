@@ -1,6 +1,6 @@
 import express = require('express')
 import { MetricsHandler } from './metrics'
-import { UsersHandler } from './users'
+import { UsersHandler, User } from './users'
 import path = require('path')
 import bodyparser = require('body-parser')
 
@@ -51,8 +51,9 @@ app.post('/metrics/:id', (req: any, res: any) => {
   })
 })
 
-app.post('/users/:id', (req: any, res: any) => {
-  dbUs.save(req.params.id, (err: Error | null) => {
+app.post('/register', (req: any, res: any) => {
+  const user = new User(req.body.name, req.body.mail, req.body.pwd)
+  dbUs.save(user, (err: Error | null) => {
     if (err) throw err
     res.status(200).send()
   })

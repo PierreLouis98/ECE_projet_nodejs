@@ -13,26 +13,27 @@
                 <section>
                     <div id="Conteneur">
                         <div id="inscription" >
-                            <form > 
+                            <form action="/register" method="POST"> 
                                 <h1> Créer un compte </h1> 
                                 <p> 
                                     <label >Nom d'utilisateur </label>
-                                    <input required="required" type="text" placeholder="Votre nom d'utilisateur" />
+                                    <input required="required" type="text" placeholder="Votre nom d'utilisateur" name="name" />
                                 </p>
                                 <p> 
                                     <label  > Votre email</label>
-                                    <input type="email" placeholder="monmail@mail.com"/> 
+                                    <input type="email" placeholder="monmail@mail.com" name="mail"/> 
                                 </p>
                                 <p> 
                                     <label>Mot de passe   </label>
-                                    <input type="password" placeholder="MonMotDePasse"/>
+                                    <input type="password" placeholder="MonMotDePasse" name="pwd"/>
                                 </p>
                                 <p> 
                                     <label >Veuillez confirmer votre mot de passe  </label>
                                     <input required="required" type="password" placeholder="MonMotDePasse"/>
                                 </p>
                                 <p class="signin button"> 
-									<input type="submit" value="Confirmer"/> 
+                                    <input type="submit" value="Confirmer" onclick="console.log(document.getElementById('name'))"/> 
+                                    
 								</p>
                                 <p class="link">  
 									Vous avez déjà un compte ? 
