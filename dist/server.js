@@ -46,7 +46,14 @@ app.post('/metrics/:id', function (req, res) {
         res.status(200).send();
     });
 });
-
+app.post('/register', function (req, res) {
+    var user = new users_1.User(req.body.name, req.body.mail, req.body.pwd);
+    dbUs.save(user, function (err) {
+        if (err)
+            throw err;
+        res.status(200).send();
+    });
+});
 app.listen(port, function (err) {
     if (err)
         throw err;

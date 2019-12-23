@@ -23,6 +23,11 @@ app.set('view engine', 'ejs');
 const dbMet: MetricsHandler = new MetricsHandler('./db/metrics')
 const dbUs: UsersHandler = new UsersHandler('./db/users')
 
+app.get('/', (req: any, res: any) => {
+  res.render('menu.ejs')
+  res.end()
+})
+
 app.get('/connexion', (req: any, res: any) => {
   res.render('connexion.ejs')
   res.end()
@@ -30,6 +35,11 @@ app.get('/connexion', (req: any, res: any) => {
 
 app.get('/inscription', (req: any, res: any) => {
   res.render('inscription.ejs')
+  res.end()
+})
+
+app.get('/graph', (req: any, res: any) => {
+  res.render('graph.ejs')
   res.end()
 })
 
@@ -56,6 +66,17 @@ app.post('/metrics/:id', (req: any, res: any) => {
     if (err) throw err
     res.status(200).send()
   })
+})
+
+app.get('/delete-metric/:key', (req: any, res: any) => {
+  dbMet.del(req.params.key, (err: Error | null, result?: any) => {
+    if (err) throw err
+    res.json(result)
+  })
+})
+
+app.post('/delete-metric/:key', (req: any, res: any) => {
+    res.status(200).send()
 })
 
 app.post('/register', (req: any, res: any) => {
