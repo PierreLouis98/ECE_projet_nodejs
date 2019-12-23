@@ -37,7 +37,7 @@ export class MetricsHandler {
         const [_, k, timestamp] = data.key.split(":")
         const value = data.value
         if (key != k) {
-          console.log(`LevelDB error: ${data} does not match key ${key}`)
+          console.log(`LevelDB error: ${k} does not match key ${key}`)
         } else {
           met.push(new Metric(timestamp, value))
         }
@@ -45,6 +45,32 @@ export class MetricsHandler {
       .on('end', (err: Error) => {
         callback(null, met)
       })
+      .on("close", () => {
+        console.log("Stream ended");
+      });
   }
+
+  public del(key: string, callback: (error: Error | null, result?: Metric) => void) {// supprimer une metric à partir de sa key (metric:Pierre:150016064)
+    const stream = this.db.createReadStream()
+    var met: Metric
+    
+    stream.on('error', callback)
+      .on('data', (data: any) => { // on ouvre la bdd
+        const [_, k, timestamp] = data.key.split(":")
+        const value = data.value
+        if (key != data.key) { // atention, gérer les erreurs (entrées incorrectes)
+          console.log(`LevelDB error: ${data.key} does not match key ${key}`)
+        } else {
+          met = new Metric(timestamp, value)
+        }
+      })
+      .on('end', (err: Error) => {
+        callback(null, met);
+       })
+      .on("close", () => {
+        console.log("Stream ended");
+      });
+      this.db.del(key); // attention: key doit être comme dans la base de donnée (metric:Pierre-Louis:1572876000000)
+    }
   
 }
