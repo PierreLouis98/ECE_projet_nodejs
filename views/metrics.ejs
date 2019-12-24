@@ -37,41 +37,48 @@
         </nav>
 
         <div class="container text-center">
-        <h1 class="mt-5 text-white font-weight-light">My profil</h1>
+        <h1 class="mt-5 text-white font-weight-light">My metrics</h1>
         </div>
 
         <div class="row">
             <div class="col-sm-6">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Username:</h5>
-                  <p class="card-text"><%- user.name %></p>
+                  <h5 class="card-title">Number of metrics:</h5>
+                  <p class="card-text"><%- metrics.length %></p>
                 </div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Email</h5>
-                  <p class="card-text"><%- user.mail %></p>
+                  <h5 class="card-title">Add new metric</h5>
+                  <form action="/new" method="POST"> 
+                  <div class="form-group">
+                    <input name="value" class="form-control" id="exampleInputPassword1" placeholder="Value">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
               </div>
             </div>
+            <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">List of all metrics</h5>
+                    <p class="card-text"><xul>
+                        <% for (var i = 0; i < metrics.length; i++) { %>
+                        <li>
+                            <a href="/metric/<%= metrics[i].timestamp %>">
+                                <%= metrics[i].timestamp %> - <%= metrics[i].value %>
+                            </a>
+                        </li>
+                        <% } %>
+                    </xul></p>
+                  </div>
+                </div>
+              </div>
           </div>
-
-        <div class="card">
-        <div class="card-body">
-        <h3 class="card-title">Update email:</h3>
-          <form action="/update" method="POST">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter new mail: </label>
-              <input type="email" name="mail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
-    </div>
           
 
     </body>

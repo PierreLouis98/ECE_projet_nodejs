@@ -12,11 +12,7 @@ export class User {
   constructor(n: string, m: string, p: string) {
     this.name = n
     this.mail = m
-    if (bcryptRegex.test(p)) {
-      this.password = p;
-  } else {
-      this.password = bcrypt.hashSync(p, 10);
-  }
+    this.password = p;
   }
 
   public comparePassword(candidatePassword: string, callback: (err: any, isMatch: any) => void) {
