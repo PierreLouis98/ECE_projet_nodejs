@@ -1,17 +1,29 @@
 import { LevelDB } from "./leveldb"
 import WriteStream from 'level-ws'
+import bcrypt from "bcrypt";
+
+const bcryptRegex = /^\$2[ayb]\$.{56}$/;
 
 export class User {
   public name: string
   public mail: string
-  public password: number
+  public password: string
 
-
-  constructor(n: string, m: string, p: number) {
+  constructor(n: string, m: string, p: string) {
     this.name = n
     this.mail = m
-    this.password = p
+    if (bcryptRegex.test(p)) {
+      this.password = p;
+  } else {
+      this.password = bcrypt.hashSync(p, 10);
   }
+  }
+
+  public comparePassword(candidatePassword: string, callback: (err: any, isMatch: any) => void) {
+    bcrypt.compare(candidatePassword, this.password, (err: Error, isMatch: boolean) => {
+        callback(err, isMatch);
+    });
+}
 }
 
 export class UsersHandler {
