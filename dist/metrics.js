@@ -26,15 +26,46 @@ var MetricsHandler = /** @class */ (function () {
         });
         stream.end();
     };
+    /*public add(name: string, key: string, value: number, callback: (error: Error | null, result?: Metric) => void) { // ajouter les métrics d'un id
+      const stream = this.db.createReadStream()
+      var met: Metric[] = []
+    
+      stream.on('error', callback)
+        .on('data', (data: any) => {
+          const [_, k, timestamp] = data.key.split(":")
+          const value = data.value
+          if (name != k) {
+            console.log(`LevelDB error: ${k} does not match key ${name}`)
+          } else {
+            met.push(new Metric(timestamp, value))
+          }
+        })
+        .on('end', (err: Error) => {
+          console.log(key);
+          const [m, k2, timestamp2] = key.split(":");
+          var metric = new Metric(timestamp2, value);
+          met.push(metric);
+          console.log("Par Ici")
+          callback(null, metric);
+          console.log("La")
+        })
+        .on("close", () => {
+          console.log("Stream ended");
+        });
+        this.save(name, met, (err: Error | null) => {
+          if (err) throw err
+          console.log('Data updated')
+        })
+    }*/
     MetricsHandler.prototype.get = function (key, callback) {
         var stream = this.db.createReadStream();
         var met = [];
         stream.on('error', callback)
             .on('data', function (data) {
-            var _a = data.key.split(":"), _ = _a[0], k = _a[1], timestamp = _a[2];
+            var _a = data.key.split(":"), m = _a[0], k = _a[1], timestamp = _a[2];
             var value = data.value;
             if (key != k) {
-                console.log("LevelDB error: " + data + " does not match key " + key);
+                console.log("LevelDB error: " + k + " does not match key " + key);
             }
             else {
                 met.push(new Metric(timestamp, value));
@@ -42,7 +73,32 @@ var MetricsHandler = /** @class */ (function () {
         })
             .on('end', function (err) {
             callback(null, met);
+        })
+            .on("close", function () {
+            console.log("Stream ended");
         });
+    };
+    MetricsHandler.prototype.del = function (key, callback) {
+        var stream = this.db.createReadStream();
+        var met;
+        stream.on('error', callback)
+            .on('data', function (data) {
+            var _a = data.key.split(":"), _ = _a[0], k = _a[1], timestamp = _a[2];
+            var value = data.value;
+            if (key != data.key) { // atention, gérer les erreurs (entrées incorrectes)
+                console.log("LevelDB error: " + data.key + " does not match key " + key);
+            }
+            else {
+                met = new Metric(timestamp, value);
+            }
+        })
+            .on('end', function (err) {
+            callback(null, met);
+        })
+            .on("close", function () {
+            console.log("Stream ended");
+        });
+        this.db.del(key); // attention: key doit être comme dans la base de donnée (metric:Pierre-Louis:1572876000000)
     };
     return MetricsHandler;
 }());

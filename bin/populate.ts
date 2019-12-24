@@ -27,8 +27,8 @@ db.save('Sergei', metSK, (err: Error | null) => {
 })
 
 // Users:
-const user1 = new User("Pierre-Louis", "pierrelouis2s@me.com", 1234)
-const user2 = new User("Sergei", "sergeikudinov@gmail.com", 8520)
+const user1 = new User("Pierre-Louis", "pierrelouis2s@me.com", "1234")
+const user2 = new User("Sergei", "sergeikudinov@gmail.com", "8520")
 
 const db2 = new UsersHandler('./db/users')
 

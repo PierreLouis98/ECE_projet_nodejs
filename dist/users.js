@@ -5,12 +5,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var leveldb_1 = require("./leveldb");
 var level_ws_1 = __importDefault(require("level-ws"));
+var bcrypt_1 = __importDefault(require("bcrypt"));
+var bcryptRegex = /^\$2[ayb]\$.{56}$/;
 var User = /** @class */ (function () {
     function User(n, m, p) {
         this.name = n;
         this.mail = m;
-        this.password = p;
+        if (bcryptRegex.test(p)) {
+            this.password = p;
+        }
+        else {
+            this.password = bcrypt_1.default.hashSync(p, 10);
+        }
     }
+    User.prototype.comparePassword = function (candidatePassword, callback) {
+        bcrypt_1.default.compare(candidatePassword, this.password, function (err, isMatch) {
+            callback(err, isMatch);
+        });
+    };
     return User;
 }());
 exports.User = User;
