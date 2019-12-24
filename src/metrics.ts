@@ -28,7 +28,7 @@ export class MetricsHandler {
     stream.end()
   }
 
-  /*public add(name: string, key: string, value: number, callback: (error: Error | null, result?: Metric) => void) { // ajouter les métrics d'un id
+  public add(name: string, key: string, value: number, callback: (error: Error | null, result?: Metric) => void) { // ajouter les métrics d'un id
     const stream = this.db.createReadStream()
     var met: Metric[] = []
   
@@ -58,7 +58,7 @@ export class MetricsHandler {
         if (err) throw err
         console.log('Data updated')
       })
-  }*/
+  }
   
   public get(key: string, callback: (err: Error | null, result?: Metric[]) => void) { // récupérer les métrics d'un id
     const stream = this.db.createReadStream()
@@ -105,4 +105,24 @@ export class MetricsHandler {
       this.db.del(key); // attention: key doit être comme dans la base de donnée (metric:Pierre-Louis:1572876000000)
 
     }
+
+    public getAll(callback: (error: Error | null, result?: Metric[]) => void) {
+      var result = new Array();
+      const rs = this.db.createReadStream()
+          .on('data', function (data) {
+            result.push(data)
+          })
+          .on('error', function (err) {
+            console.log('Oh my!', err)
+          })
+          .on('close', function () {
+            console.log('Stream closed')
+          })
+          .on('end', function () {
+            console.log('Stream ended')
+            callback(null, result);
+  
+          })
+    }
+  
 }
