@@ -15,7 +15,13 @@
   "dependencies": {
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
+<<<<<<< HEAD
     "bootstrap": "^4.4.1",
+=======
+    "canvas": "^2.6.1",
+    "chart.js": "^2.9.3",
+    "chartjs-node-canvas": "^2.4.1",
+>>>>>>> 60a36dc99a500b036d923850a2a191c896524c1f
     "ejs": "^2.7.4",
     "encoding-down": "^6.3.0",
     "express": "^4.17.1",
@@ -23,7 +29,11 @@
     "level-ws": "^2.0.0",
     "leveldown": "^5.4.1",
     "levelup": "^4.3.2",
+<<<<<<< HEAD
     "passport": "^0.4.1",
+=======
+    "mdbootstrap": "^4.11.0",
+>>>>>>> 60a36dc99a500b036d923850a2a191c896524c1f
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",

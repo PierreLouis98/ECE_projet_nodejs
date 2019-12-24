@@ -32,10 +32,10 @@
 .container > header h1{
 	font-size: 40px ;
 	font-weight: 400;
-	color: rgba(13, 18, 20, 0.9);
+	color: white;
 }
 .container > header h1 span{
-	color: #09435a;
+	color:black;
 	text-shadow: 1px 1px 1px rgba(48, 43, 80, 0.966);}
 /* Css des inputs */
 #Conteneur input:not([type="checkbox"]){
@@ -97,7 +97,7 @@ p.link{
 /* CSS arrière plan  */
 body{
 	max-width: 100%;
-	background: url(../images/bg.jpg) repeat top left ;
+	background: linear-gradient(to right, #0062E6, #33AEFF);
 	font-weight: 400;
 	font-size: 15px;
 	color: #1d3c41;
