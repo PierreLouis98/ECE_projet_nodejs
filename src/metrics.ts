@@ -18,20 +18,19 @@ export class MetricsHandler {
     this.db = LevelDB.open(dbPath)
   }
   
-  public save(key: string, metrics: Metric[], callback: (error: Error | null) => void) { // ajouter les métrics d'un id
+  public save(name: string, metrics: Metric[], callback: (error: Error | null) => void) { // ajouter les métrics d'un id
     const stream = WriteStream(this.db)
     stream.on('error', callback)
     stream.on('close', callback)
     metrics.forEach((m: Metric) => {
-      stream.write({ key: `metric:${key}:${m.timestamp}`, value: m.value })
+      stream.write({ key: `metric:${name}:${m.timestamp}`, value: m.value })
     })
     stream.end()
   }
 
-  /*public add(name: string, key: string, value: number, callback: (error: Error | null, result?: Metric) => void) { // ajouter les métrics d'un id
+  public add(name: string, metric: Metric, callback: (error: Error | null) => void) { // ajouter les métrics d'un id
     const stream = this.db.createReadStream()
     var met: Metric[] = []
-  
     stream.on('error', callback)
       .on('data', (data: any) => {
         const [_, k, timestamp] = data.key.split(":")
@@ -43,22 +42,17 @@ export class MetricsHandler {
         }
       })
       .on('end', (err: Error) => {
-        console.log(key);
-        const [m, k2, timestamp2] = key.split(":");
-        var metric = new Metric(timestamp2, value);
         met.push(metric);
-        console.log("Par Ici")
-        callback(null, metric);
-        console.log("La")
+        callback
       })
       .on("close", () => {
         console.log("Stream ended");
       });
       this.save(name, met, (err: Error | null) => {
         if (err) throw err
-        console.log('Data updated')
+        console.log('Data reupdated')
       })
-  }*/
+  }
   
   public get(key: string, callback: (err: Error | null, result?: Metric[]) => void) { // récupérer les métrics d'un id
     const stream = this.db.createReadStream()
@@ -81,6 +75,11 @@ export class MetricsHandler {
         console.log("Stream ended");
       });
   }
+
+  public get_one(key: string, value: number, callback: (err: Error | null, result?: Metric) => void) { // récupérer les métrics d'un id
+  const [_, k, timestamp] = key.split(":")
+  callback(null, new Metric(timestamp, value));
+}
 
   public del(key: string, callback: (error: Error | null, result?: Metric) => void) {// supprimer une metric à partir de sa key (metric:Pierre:150016064)
     const stream = this.db.createReadStream()

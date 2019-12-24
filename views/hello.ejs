@@ -20,14 +20,14 @@
       <div id="deleted"></div>
 
       <h5>c) Ajouter:</h5>
-      <p class="input-group">
-        <form action="/insert-metric" method="POST"> 
-          <input required="required" type="text" class="form-control" placeholder="Enter value" name="value">
-          <p class="signin button">
-            <button class="btn btn-success" id="add-metric">Add a metric</button>
-          </p>
-        </form>
-      </p>
+      <div class="input-group mb-3">
+        <input required="required" type="text" class="form-control" placeholder="Enter value" name="value">
+        <div class="input-group-append">
+          <button class="btn btn-success" id="add-metric">
+            Add a metric
+          </button>
+        </div>
+      </div>
       <div id="added"></div>
 
       <h5>d) Modifier:</h5>
@@ -71,14 +71,15 @@
         });
       })
 
-      /*$('#add-metric').click((e) => { // changer
+      $('#add-metric').click((e) => { // changer
         e.preventDefault();
-        value = '16'; // valeur, ici mise par défaut, mais à récupérer la prochaine fois sur l'input
-        time = '1572876000000';
-        const result = '<div>timestamp: '+time+', value: '+value+'</div>';
-        $.getJSON('/insert-metric?key=metric:<%= name %>:'+ time+'&value='+value+'', {}); // erreur: key et value ne passe aucune valeur
-        $('#added').append(result); // append: Insert content, specified by the parameter, to the end of each element in the set of matched elements
-      })*/
+
+        var path = '/insert-metric/Pierre-Louis/metric:Pierre-Louis:1572876000000/17'; // test de base
+        $.getJSON(path, {}, (data) => {
+          const result = '<div>timestamp: '+data.timestamp+', value: '+data.value+'</div>';
+          $('#added').append("you");
+        });
+      })
 
       $('#modify-metric').click((e) => { // changer
         e.preventDefault();
