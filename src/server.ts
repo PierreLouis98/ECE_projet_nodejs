@@ -91,25 +91,21 @@ app.post('/delete-metric/:key', (req: any, res: any) => {
 
 /* Add a metric*/
 app.post('/new', (req: any, res: any) => {
-
-    var user = req.session.user
-    console.log(req.body.value)
-    console.log()
-    dbMet.add(session.name, session.name, req.body.value, (err: Error | null, result?:any) => {
+  
+    dbMet.add(req.session.user.name, req.session.user.name, req.body.value, (err: Error | null, result?:any) => {
       if (err) throw err
       res.redirect('/metrics')
     });
+    console.log("adding metrics")
 });
 
 
 
 app.get('/metrics', (req: any, res: any) => {
-  //var user = req.session.user
-  //console.log(user.name)
-  dbMet.get("Sergei", (err, metrics: any) =>{
+  dbMet.get(req.session.user.name, (err, metrics: any) =>{
     if (err) return res.redirect("/home");
   res.render('metrics.ejs', {user: req.session.user, metrics: metrics})
-  console.log(req.session.user)
+  console.log("metrics render ok")
 })
 })
 

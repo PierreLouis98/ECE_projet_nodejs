@@ -47,9 +47,7 @@ export class MetricsHandler {
         const [m, k2, timestamp2] = key.split(":");
         var metric = new Metric(timestamp2, value);
         met.push(metric);
-        console.log("Par Ici")
         callback(null, metric);
-        console.log("La")
       })
       .on("close", () => {
         console.log("Stream ended");
