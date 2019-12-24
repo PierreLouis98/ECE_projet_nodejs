@@ -3,6 +3,7 @@ import { MetricsHandler } from './metrics'
 import { UsersHandler, User } from './users'
 import path = require('path')
 import bodyparser = require('body-parser')
+import { userInfo } from 'os'
 
 var session = require('express-session')
 const app = express()
@@ -24,7 +25,8 @@ const dbMet: MetricsHandler = new MetricsHandler('./db/metrics')
 const dbUs: UsersHandler = new UsersHandler('./db/users')
 
 app.get('/', (req: any, res: any) => {
-  res.render('menu.ejs')
+  res.render('menu.ejs', {
+  user: req.user })
   res.end()
 })
 
@@ -92,7 +94,6 @@ app.post('/register', (req: any, res: any) => {
 
 app.post('/login', (req: any, res: any) => {
   dbUs.get(req.body.name, (err: Error | null, result?: User) => {
-    console.log(result)
     if (err) { 
     res.redirect('/connexion')
     }
@@ -104,7 +105,7 @@ app.post('/login', (req: any, res: any) => {
     }
     else {
       req.session.loggedIn = true;
-      req.session.user = result
+      req.session.user = result;
       res.redirect('/home')
     }
   })
@@ -123,6 +124,24 @@ app.get('/logout', (req: any, res: any) => {
   delete req.session.user
   res.redirect("/connexion")
 })
+
+app.get('/user', (req: any, res: any) => {
+  res.render('user.ejs', {user: req.session.user})
+  console.log(req.session.user)
+})
+
+app.post('/update', (req: any, res: any, next: any )=> {
+  var user = req.session.user
+  dbUs.get(user.name, (err, user: any) => {
+    if (err) return next(err);
+    user.mail = req.body.mail;
+    dbUs.save(user, (err) => {
+      if (err) return next(err);
+      res.redirect("/user");
+    });
+  });
+  
+});
 
 app.listen(port, (err: Error) => {
   if (err) throw err

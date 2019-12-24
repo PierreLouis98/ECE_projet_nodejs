@@ -16,6 +16,9 @@
             </div>
             <header>
                 <h1>Menu</h1>	
+                <% if (user) { %>
+                    Hello, <%- user.name %>!
+                <% } %>
             </header>
             <section>				
                 <div id="container_demo" >
